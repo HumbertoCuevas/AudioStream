@@ -16,7 +16,6 @@
 <body>
     <header class="container">
         <h1>AudioStream</h1>
-        <p>Reproductor de musica</p>
         <nav aria-label=" Menu principal ">
             <a href="view/portada.html">Portada</a> |
             <a href="#reproductor">Reproductor</a> |
@@ -41,6 +40,7 @@
                     <button class="btn" type="button" id="pausar">
                         <img class="icono" src="resources/imagenes/pausar.png" alt=""> Pausar
                     </button>
+                    <button class="btn corazon" type="button" id="favorito">♥</button>
                     <button class="btn" type="button" id="siguiente">
                         <img class="icono" src="resources/imagenes/siguiente.png" alt=""> Siguiente
                     </button>
@@ -48,7 +48,6 @@
 
                 <label for="progreso">Progreso</label>
                 <input type="range" id="progreso" min="0" max="100" value="0" step="0.1">
-                
 
                 <label for="volumen">
                     <img class="icono" src="resources/imagenes/volumen.png" alt=""> Volumen
@@ -56,12 +55,9 @@
                 <input type="range" id="volumen" min="0" max="1" value="0.5" step="0.1">
             </section>
 
-
-
-
             <section class="panel visualizador" aria-labelledby="tituloVisualizador">
                 <h2 id="tituloVisualizador">Visualizador</h2>
-                <img id="imagenActual" class="portada-album" src="resources/imagenes/AI.jpg" alt="Portada de Ai">
+                <img id="imagenActual" class="portada-album" src="resources/imagenes/style.jpg" alt="Portada de estilo">
                 <p id="estado" aria-live="polite">Detenido</p>
                 <p id="numeroCancion">Cancion 1 de 10</p>
             </section>
@@ -170,7 +166,7 @@
 
 
     <footer class="container">
-        <p>  Enlace </p>
+        <p class = "git">  Enlace </p>
         
         <a id="github" class="btn" href="https://github.com/HumbertoCuevas/AudioStream" target="_blank" rel="noopener noreferrer"> Enlace a git </a>
 

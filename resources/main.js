@@ -3,30 +3,48 @@ var cancion = 1;
 var progreso = document.getElementById('progreso');
 var volumen = document.getElementById('volumen');
 var estado = document.getElementById('estado');
+var tiempo = document.getElementById('tiempo');
+var botonReproducir = document.getElementById('reproducir');
+var botonPausar = document.getElementById('pausar');
+var botonFavorito = document.getElementById('favorito');
+var botonAnterior = document.getElementById('anterior');
+var botonSiguiente = document.getElementById('siguiente');
 
-audio.volume = parseFloat(volumen.value);
+if(audio && volumen){
+    audio.volume = parseFloat(volumen.value);
+}
 
 function reproducirCancion(){
-    estado.textContent = 'Cargando...';
+    if(!audio){
+        return;
+    }
+
+    if(estado){
+        estado.textContent = 'Cargando...';
+    }
+
     audio.play();
 }
 
 function pausarCancion(){
-    audio.pause();
-    estado.textContent = 'Pausado';
-}
+    if(!audio){
+        return;
+    }
 
-function detenerCancion(){
     audio.pause();
-    audio.currentTime = 0;
-    progreso.value = 0;
-    actualizarTiempo();
-    estado.textContent = 'Detenido';
+    if(estado){
+        estado.textContent = 'Pausado';
+    }
 }
 
 function seleccionarCancion(numero){
     cancion = numero;
-    var nombre = document.getElementById('cancion' + numero).value;
+    var boton = document.getElementById('cancion' + numero);
+    if(!boton || !audio){
+        return;
+    }
+
+    var nombre = boton.value;
     var titulo = document.getElementById('titulo' + numero).textContent;
     var imagen = document.getElementById('imagen' + numero);
 
@@ -36,8 +54,15 @@ function seleccionarCancion(numero){
     document.getElementById('imagenActual').src = imagen.src;
     document.getElementById('imagenActual').alt = imagen.alt;
     document.getElementById('numeroCancion').textContent = 'Cancion ' + numero + ' de 10';
-    progreso.value = 0;
-    document.getElementById('tiempo').textContent = '0:00 / 0:00';
+
+    if(progreso){
+        progreso.value = 0;
+    }
+
+    if(tiempo){
+        tiempo.textContent = '0:00 / 0:00';
+    }
+
     reproducirCancion();
 }
 
@@ -58,17 +83,18 @@ function cancionSiguiente(){
 }
 
 function cambiarVolumen(){
-    audio.volume = parseFloat(volumen.value);
+    if(audio && volumen){
+        audio.volume = parseFloat(volumen.value);
+    }
 }
 
 function cambiarProgreso(){
-    if(audio.duration > 0){
+    if(audio && progreso && audio.duration > 0){
         audio.currentTime = parseFloat(progreso.value) * audio.duration / 100;
         actualizarTiempo();
     }
 }
 
-// Convierte los segundos a minutos y segundos.
 function formatoTiempo(segundos){
     var minutos = Math.floor(segundos / 60);
     var resto = Math.floor(segundos % 60);
@@ -79,29 +105,61 @@ function formatoTiempo(segundos){
 }
 
 function actualizarTiempo(){
+    if(!audio){
+        return;
+    }
+
     if(audio.duration > 0){
-        progreso.value = audio.currentTime * 100 / audio.duration;
-        document.getElementById('tiempo').textContent = formatoTiempo(audio.currentTime) + ' / ' + formatoTiempo(audio.duration);
-    }else{
-        document.getElementById('tiempo').textContent = '0:00 / 0:00';
+        if(progreso){
+            progreso.value = audio.currentTime * 100 / audio.duration;
+        }
+        if(tiempo){
+            tiempo.textContent = formatoTiempo(audio.currentTime) + ' / ' + formatoTiempo(audio.duration);
+        }
+    }else if(tiempo){
+        tiempo.textContent = '0:00 / 0:00';
     }
 }
 
-document.getElementById('reproducir').addEventListener('click', reproducirCancion);
-document.getElementById('pausar').addEventListener('click', pausarCancion);
-document.getElementById('detener').addEventListener('click', detenerCancion);
-document.getElementById('anterior').addEventListener('click', cancionAnterior);
-document.getElementById('siguiente').addEventListener('click', cancionSiguiente);
-volumen.addEventListener('input', cambiarVolumen);
-progreso.addEventListener('input', cambiarProgreso);
-audio.addEventListener('timeupdate', actualizarTiempo);
-audio.addEventListener('loadedmetadata', actualizarTiempo);
-audio.addEventListener('playing', function(){
-    estado.textContent = 'Reproduciendo';
-});
-audio.addEventListener('ended', function(){
-    estado.textContent = 'Cancion terminada';
-});
-audio.addEventListener('error', function(){
-    estado.textContent = 'No se pudo abrir el audio. Revisa el archivo.';
-});
+if(botonReproducir){
+    botonReproducir.addEventListener('click', reproducirCancion);
+}
+if(botonPausar){
+    botonPausar.addEventListener('click', pausarCancion);
+}
+if(botonFavorito){
+    botonFavorito.addEventListener('click', function(){
+        botonFavorito.style.color = 'black';
+    });
+}
+if(botonAnterior){
+    botonAnterior.addEventListener('click', cancionAnterior);
+}
+if(botonSiguiente){
+    botonSiguiente.addEventListener('click', cancionSiguiente);
+}
+if(volumen){
+    volumen.addEventListener('input', cambiarVolumen);
+}
+if(progreso){
+    progreso.addEventListener('input', cambiarProgreso);
+}
+if(audio){
+    audio.addEventListener('timeupdate', actualizarTiempo);
+    audio.addEventListener('loadedmetadata', actualizarTiempo);
+    audio.addEventListener('playing', function(){
+        if(estado){
+            estado.textContent = 'Reproduciendo';
+        }
+    });
+    audio.addEventListener('ended', function(){
+        if(estado){
+            estado.textContent = 'Cancion terminada';
+        }
+    });
+    audio.addEventListener('error', function(){
+        if(estado){
+            estado.textContent = 'No se pudo abrir el audio. Revisa el archivo.';
+        }
+    });
+}
