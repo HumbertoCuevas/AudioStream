@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudioStream Web</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="resources/estilos.css">
+    <script src="resources/main.js" defer></script>
+</head>
+
+
+
+
+
+<body>
+    <header class="container">
+        <h1>AudioStream</h1>
+        <p>Reproductor de musica</p>
+        <nav aria-label=" Menu principal ">
+            <a href="view/portada.html">Portada</a> |
+            <a href="#reproductor">Reproductor</a> |
+            <a href="#lista">Canciones</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="distribucion">
+            <section id="reproductor" class="panel">
+                <h2>Reproductor</h2>
+                <h3 id="cancionActual">Ai</h3>
+                <audio id="audio" src="resources/audios/ai.mp3" preload="metadata"></audio>
+
+                <p>
+                    <button class="btn" type="button" id="anterior">
+                        <img class="icono" src="resources/imagenes/anterior.png" alt=""> Anterior
+                    </button>
+                    <button class="btn" type="button" id="reproducir">
+                        <img class="icono" src="resources/imagenes/reproducir.png" alt=""> Reproducir
+                    </button>
+                    <button class="btn" type="button" id="pausar">
+                        <img class="icono" src="resources/imagenes/pausar.png" alt=""> Pausar
+                    </button>
+                    <button class="btn" type="button" id="siguiente">
+                        <img class="icono" src="resources/imagenes/siguiente.png" alt=""> Siguiente
+                    </button>
+                </p>
+
+                <label for="progreso">Progreso</label>
+                <input type="range" id="progreso" min="0" max="100" value="0" step="0.1">
+                
+
+                <label for="volumen">
+                    <img class="icono" src="resources/imagenes/volumen.png" alt=""> Volumen
+                </label>
+                <input type="range" id="volumen" min="0" max="1" value="0.5" step="0.1">
+            </section>
+
+
+
+
+            <section class="panel visualizador" aria-labelledby="tituloVisualizador">
+                <h2 id="tituloVisualizador">Visualizador</h2>
+                <img id="imagenActual" class="portada-album" src="resources/imagenes/AI.jpg" alt="Portada de Ai">
+                <p id="estado" aria-live="polite">Detenido</p>
+                <p id="numeroCancion">Cancion 1 de 10</p>
+            </section>
+
+            <section id="lista" class="panel lista">
+                <h2>Lista de canciones</h2>
+                <div class="row">
+                    <article class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="cancion">
+                            <img id="imagen1" class="portada-album" src="resources/imagenes/AI.jpg" alt="Portada de Ai">
+                            <h3 id="titulo1">Ai</h3>
+                            <button class="btn" id="cancion1" type="button" value="ai" onclick="seleccionarCancion(1)" aria-label="Escuchar Ai">
+                                <img class="icono" src="resources/imagenes/reproducir.png" alt=""> Escuchar
+                            </button>
+                        </div>
+                    </article>
+                    <article class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="cancion">
+                            <img id="imagen2" class="portada-album" src="resources/imagenes/besame.jpg" alt="Portada de Besame">
+                            <h3 id="titulo2">Besame</h3>
+                            <button class="btn" id="cancion2" type="button" value="bes" onclick="seleccionarCancion(2)" aria-label="Escuchar Besame">
+                                <img class="icono" src="resources/imagenes/reproducir.png" alt=""> Escuchar
+                            </button>
+                        </div>
+                    </article>
+                    <article class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="cancion">
+                            <img id="imagen3" class="portada-album" src="resources/imagenes/don.jpg" alt="Portada de Don">
+                            <h3 id="titulo3">Don</h3>
+                            <button class="btn" id="cancion3" type="button" value="don" onclick="seleccionarCancion(3)" aria-label="Escuchar Don">
+                                <img class="icono" src="resources/imagenes/reproducir.png" alt=""> Escuchar
+                            </button>
+                        </div>
+                    </article>
+                    <article class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="cancion">
+                            <img id="imagen4" class="portada-album" src="resources/imagenes/ella.jpg" alt="Portada de Ella">
+                            <h3 id="titulo4">Ella</h3>
+                            <button class="btn" id="cancion4" type="button" value="ella" onclick="seleccionarCancion(4)" aria-label="Escuchar Ella">
+                                <img class="icono" src="resources/imagenes/reproducir.png" alt=""> Escuchar
+                            </button>
+                        </div>
+                    </article>
+                    <article class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="cancion">
+                            <img id="imagen5" class="portada-album" src="resources/imagenes/ino.jpg" alt="Portada de Inolvidable">
+                            <h3 id="titulo5">Inolvidable</h3>
+                            <button class="btn" id="cancion5" type="button" value="inol" onclick="seleccionarCancion(5)" aria-label="Escuchar Inolvidable">
+                                <img class="icono" src="resources/imagenes/reproducir.png" alt=""> Escuchar
+                            </button>
+                        </div>
+                    </article>
+                    <article class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="cancion">
+                            <img id="imagen6" class="portada-album" src="resources/imagenes/machine.jpg" alt="Portada de Machine Love">
+                            <h3 id="titulo6">Machine Love</h3>
+                            <button class="btn" id="cancion6" type="button" value="love" onclick="seleccionarCancion(6)" aria-label="Escuchar Machine Love">
+                                <img class="icono" src="resources/imagenes/reproducir.png" alt=""> Escuchar
+                            </button>
+                        </div>
+                    </article>
+                    <article class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="cancion">
+                            <img id="imagen7" class="portada-album" src="resources/imagenes/mien.jpg" alt="Portada de Mientes">
+                            <h3 id="titulo7">Mientes</h3>
+                            <button class="btn" id="cancion7" type="button" value="min" onclick="seleccionarCancion(7)" aria-label="Escuchar Mientes">
+                                <img class="icono" src="resources/imagenes/reproducir.png" alt=""> Escuchar
+                            </button>
+                        </div>
+                    </article>
+                    <article class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="cancion">
+                            <img id="imagen8" class="portada-album" src="resources/imagenes/tacones.jpg" alt="Portada de Tacones rojos">
+                            <h3 id="titulo8">Tacones rojos</h3>
+                            <button class="btn" id="cancion8" type="button" value="rojo" onclick="seleccionarCancion(8)" aria-label="Escuchar Tacones rojos">
+                                <img class="icono" src="resources/imagenes/reproducir.png" alt=""> Escuchar
+                            </button>
+                        </div>
+                    </article>
+                    <article class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="cancion">
+                            <img id="imagen9" class="portada-album" src="resources/imagenes/Seven.jpeg" alt="Icono de reproduccion; portada sin asignar">
+                            <h3 id="titulo9">Seven</h3>
+                            <button class="btn" id="cancion9" type="button" value="seven" onclick="seleccionarCancion(9)" aria-label="Escuchar Seven">
+                                <img class="icono" src="resources/imagenes/reproducir.png" alt=""> Escuchar
+                            </button>
+                        </div>
+                    </article>
+                    <article class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="cancion">
+                            <img id="imagen10" class="portada-album" src="resources/imagenes/Sun.jpg" alt="Icono de reproduccion; portada sin asignar">
+                            <h3 id="titulo10">Sun</h3>
+                            <button class="btn" id="cancion10" type="button" value="sun" onclick="seleccionarCancion(10)" aria-label="Escuchar Sun">
+                                <img class="icono" src="resources/imagenes/reproducir.png" alt=""> Escuchar
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+
+
+
+
+
+
+    <footer class="container">
+        <p>  Enlace </p>
+        
+        <a id="github" class="btn" href="https://github.com/" target="_blank" rel="noopener noreferrer"> Enlace a git </a>
+
+        
+    </footer>
+</body>
+</html>

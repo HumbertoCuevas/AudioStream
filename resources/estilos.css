@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
+:root {
+    --fuente: 'Roboto', Arial, sans-serif;
+    --fondo-inicio: #eeeeee;
+    --fondo-final: #ffffff;
+    --panel: #ffffff;
+    --texto: #222222;
+    --boton: #eeeeee;
+    --boton-hover: #cccccc;
+}
+
+body {
+    margin: 0;
+    font-family: var(--fuente);
+    color: var(--texto);
+    background: linear-gradient(to right, var(--fondo-inicio), var(--fondo-final));
+}
+
+header, footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+h1 { font-size: 28px; }
+h2 { font-size: 23px; }
+h3 { font-size: 18px; }
+
+nav a { margin-right: 8px; }
+a { color: #333333; }
+a:hover { color: #000000; }
+
+/* Distribucion principal con CSS Grid. */
+.distribucion {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+}
+
+.panel {
+    padding: 15px;
+    border: 1px solid #aaaaaa;
+    background-color: var(--panel);
+    min-width: 0;
+}
+
+.lista { grid-column: 1 / 3; }
+.visualizador { text-align: center; }
+
+.cancion {
+    text-align: center;
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #cccccc;
+}
+
+.portada-album {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.icono {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
+
+
+.btn {
+    margin: 4px 2px;
+    padding: 6px 10px;
+    border: 1px solid #888888;
+    border-radius: 0;
+    background-color: var(--boton);
+    color: var(--texto);
+    font: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background-color: var(--boton-hover);
+    border-color: #888888;
+    color: var(--texto);
+}
+
+.btn:focus-visible, a:focus-visible, input:focus-visible {
+    outline: 2px solid #333333;
+    outline-offset: 2px;
+}
+
+input[type="range"] {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    accent-color: #555555;
+}
+
+@media (max-width: 767px) {
+    .distribucion { grid-template-columns: 1fr; }
+    .lista { grid-column: 1; }
+}
